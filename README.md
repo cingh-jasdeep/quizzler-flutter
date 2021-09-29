@@ -1,7 +1,6 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
-
-
 # Quizzler ❓
+
+>Fork of https://github.com/londonappbrewery/quizzler-flutter with updated Flutter Code
 
 ## Our Goal
 
