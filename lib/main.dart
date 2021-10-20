@@ -33,7 +33,6 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   QuizBrain quizBrain = QuizBrain();
 
-  int questionNumber = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -73,10 +72,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                quizBrain.questionBank[questionNumber].questionAnswer = true;
+                // quizBrain.questionBank[questionNumber].questionAnswer = true;
 
-                bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
 
                 if (correctAnswer == true) {
                   print('user picked right answer');
@@ -84,8 +82,7 @@ class _QuizPageState extends State<QuizPage> {
                   print('user picked wrong answer');
                 }
                 setState(() {
-                  questionNumber++;
-                  print(questionNumber);
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -105,10 +102,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                quizBrain.questionBank[questionNumber].questionAnswer = false;
+                // quizBrain.questionBank[questionNumber].questionAnswer = false;
 
-                bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
 
                 if (correctAnswer == false) {
                   print('user picked right answer');
@@ -116,8 +112,7 @@ class _QuizPageState extends State<QuizPage> {
                   print('user picked wrong answer');
                 }
                 setState(() {
-                  questionNumber++;
-                  print(questionNumber);
+                  quizBrain.nextQuestion();
                 });
               },
             ),
