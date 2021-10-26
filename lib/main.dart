@@ -33,7 +33,6 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
   bool a = false;
-  int questionNumber = 0;
   QuizBrain quizBrain = QuizBrain();
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -75,10 +74,8 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
                 setState(() {
-                  quizBrain.questionBank[questionNumber].questionAnswer = true;
-
-                  if (quizBrain.questionBank[questionNumber].questionAnswer ==
-                      true) {
+                  bool correctAnswer = quizBrain.getQuestionAnswer();
+                  if (correctAnswer == true) {
                     scoreKeeper.add(
                       Icon(
                         Icons.check,
@@ -95,7 +92,7 @@ class _QuizPageState extends State<QuizPage> {
                     );
                     print('User picked wrong');
                   }
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -116,9 +113,8 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked false.
                 setState(() {
-                  quizBrain.questionBank[questionNumber].questionAnswer = false;
-                  if (quizBrain.questionBank[questionNumber].questionAnswer ==
-                      false) {
+                  bool correctAnswer = quizBrain.getQuestionAnswer();
+                  if (correctAnswer == false) {
                     scoreKeeper.add(
                       Icon(
                         Icons.check,
@@ -135,7 +131,7 @@ class _QuizPageState extends State<QuizPage> {
                     );
                     print('User picked wrong');
                   }
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
